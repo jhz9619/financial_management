@@ -4,6 +4,7 @@ spring:
     username: root
     password: 123456
     url: jdbc:mysql://47.113.216.99:3306/FinancialManagement
-mybatis:
-  config-location: classpath:mybatis/mybatis-confi.xml
-  mapper-locations: classpath:mybatis/mapper/*.xml
+# 配置日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

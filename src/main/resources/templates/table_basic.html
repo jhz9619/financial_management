@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台模板</title>
+    <div th:include="commons :: thead"></div>
+</head>
+<body>
+<!-- Begin page -->
+
+<div th:include="commons :: badmin"/>
+
+
+<!-- end page -->
+
+
+<div class="admin">
+    <!--<div class="am-g">-->
+    <!-- ========== Left Sidebar Start ========== -->
+    <!--<div class="left side-menu am-hide-sm-only am-u-md-1 am-padding-0">
+        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 548px;">
+            <div class="sidebar-inner slimscrollleft" style="overflow: hidden; width: auto; height: 548px;">-->
+    <!-- sidebar start -->
+    <div th:replace="commons :: tleftSidebar"/>                  <!-- sidebar end -->
+
+    <!--</div>
+</div>
+</div>-->
+    <!-- ========== Left Sidebar end ========== -->
+
+
+    <!--	<div class="am-g">-->
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="am-g">
+                <!-- Row start -->
+                <div class="am-u-sm-6">
+                    <div class="card-box">
+                        <!-- col start -->
+                        <table class="am-table">
+                            <thead>
+                            <tr>
+                                <th>网站名称</th>
+                                <th>网址</th>
+                                <th>创建时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!-- col end -->
+                    </div>
+                </div>
+
+                <div class="am-u-sm-6">
+                    <div class="card-box">
+                        <!-- col start -->
+                        <table class="am-table  am-table-hover">
+                            <thead>
+                            <tr>
+                                <th>网站名称</th>
+                                <th>网址</th>
+                                <th>创建时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!-- col end -->
+                    </div>
+                </div>
+                <!-- Row end -->
+            </div>
+
+            <!-- row start -->
+            <div class="am-g">
+                <!-- col start -->
+                <div class="am-u-md-6">
+                    <div class="card-box">
+                        <table class="am-table am-table-bordered">
+                            <thead>
+                            <tr>
+                                <th>网站名称</th>
+                                <th>网址</th>
+                                <th>创建时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- col end -->
+
+                <!-- col start -->
+                <div class="am-u-md-6">
+                    <div class="card-box">
+                        <table class="am-table  am-table-striped">
+                            <thead>
+                            <tr>
+                                <th>网站名称</th>
+                                <th>网址</th>
+                                <th>创建时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            <tr>
+                                <td>Amaze UI</td>
+                                <td>http://amazeui.org</td>
+                                <td>2012-10-01</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- col end -->
+            </div>
+            <!-- row end -->
+
+
+        </div>
+    </div>
+    <!-- end right Content here -->
+    <!--</div>-->
+</div>
+
+
+<!-- navbar -->
+<a href="admin-offcanvas" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+   data-am-offcanvas="{target: '#admin-offcanvas'}"><!--<i class="fa fa-bars" aria-hidden="true"></i>--></a>
+
+<div th:include="commons :: tscript"></div>
+
+
+</body>
+
+</html>
