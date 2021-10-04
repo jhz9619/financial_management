@@ -2,17 +2,16 @@ package com.example.financial_management.controller;
 
 
 import com.example.financial_management.service.impl.EmployeeServiceImpl;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author Li
@@ -24,18 +23,16 @@ public class EmployeeController {
     EmployeeServiceImpl employeeService;
 
     @RequestMapping("/adminLogin")
+    @ApiOperation("admin登陆判断")
     public String adminLogin(@RequestParam("username") String username
-            , @RequestParam("password") String password,@RequestParam(value = "remember",required = false)String is_remember
-            , HttpSession session
-            , HttpServletResponse response){
+            , @RequestParam("password") String password, Model model) {
         boolean login = employeeService.is_login(username, password);
         if(login){
-            if(is_remember!=null){
-
-            }
             return "index";
+        }else {
+            model.addAttribute("error", "登录失败,请检查用户名和密码");
+            return "login";
         }
-        return "index";
     }
 }
 

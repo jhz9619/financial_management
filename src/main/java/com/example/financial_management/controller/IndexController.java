@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Api("页面跳转控制")
 public class IndexController {
 
-    @RequestMapping({"/","/login"})
+    @RequestMapping({"/", "/login"})
     @ApiOperation(" 跳转登录页")
     public String login() {
         return "login";
