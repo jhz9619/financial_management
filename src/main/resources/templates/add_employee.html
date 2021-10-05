@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台模板</title>
+    <div th:include="commons :: thead"></div>
+</head>
+<body>
+
+<div th:include="commons :: badmin"/>
+
+
+<div class="admin">
+    <div th:replace="commons :: tleftSidebar"/>
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <!-- col start -->
+            <div class="am-u-md-12">
+                <div class="am-panel am-panel-secondary">
+                    <div class="am-panel-hd">新增员工</div>
+                    <div class="am-panel-bd ">
+                        <form id="emp_form" class="am-form am-text-sm">
+                            <div class="am-form-group">
+                                <div class="am-g">
+                                    <label class="am-u-md-2 am-md-text-right am-padding-left-0"
+                                           for="doc-ipt-text-1">姓名</label>
+                                    <input name="ename" class="am-u-md-10 form-control" id="doc-ipt-text-1"
+                                           placeholder="输入标题信息">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-g">
+                                    <label class="am-u-md-2 am-md-text-right am-padding-left-0">性别</label>
+                                    <div class="am-radio-inline">
+                                        <label>
+                                            <input id="sexR" type="radio" name="sex" value="男" checked>
+                                            男
+                                        </label>
+                                    </div>
+                                    <div class="am-radio-inline">
+                                        <label>
+                                            <input type="radio" name="sex" value="女">
+                                            女
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-g">
+                                    <label class="am-u-md-2 am-md-text-right am-padding-left-0"
+                                           for="doc-ipt-pwd-1">密码</label>
+                                    <input name="password" type="password" class="am-u-md-10" id="doc-ipt-pwd-1"
+                                           placeholder="设置个密码吧">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-g">
+                                    <label class="am-u-md-2 am-md-text-right am-padding-left-0"
+                                           for="doc-ipt-date-3">入职时间</label>
+                                    <input name="entryDate" type="date" class="am-u-md-10" id="doc-ipt-date-3"
+                                           placeholder="选择时间">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-g">
+                                    <label class="am-u-md-2 am-md-text-right am-padding-left-0"
+                                           for="doc-ipt-text-4">基本工资</label>
+                                    <input name="basicSalary" type="number" class="am-u-md-10 form-control" id="doc-ipt-text-4"
+                                           placeholder="工资">
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="doc-select-1">部门</label>
+                                <select id="doc-select-1">
+                                </select>
+                                <span class="am-form-caret"></span>
+                            </div>
+                            <div class="am-form-group">
+                                <label for="doc-select-2">职位</label>
+                                <select id="doc-select-2">
+                                </select>
+                                <span class="am-form-caret"></span>
+                            </div>
+                        </form>
+                        <button onclick="addThisNotice()" style="margin-left: 30%; width: 30%;" class="am-btn am-btn-secondary ">发布
+                        </button>
+
+                    </div>
+                </div>
+                <!--                <div class="card-box">-->
+                <!--                    <h4 class="header-title m-t-0 m-b-30"></h4>-->
+                <!--                    -->
+
+                <!--                </div>-->
+            </div>
+            <!-- col end -->
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<a href="admin-offcanvas" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+   data-am-offcanvas="{target: '#admin-offcanvas'}"><!--<i class="fa fa-bars" aria-hidden="true"></i>--></a>
+<div th:include="commons :: tscript"></div>
+<script type="text/javascript" th:src="@{assets/js/charts/echarts.min.js}"></script>
+<script type="text/javascript" th:src="@{assets/js/charts/indexChart.js}"></script>
+<script>
+    layui.use('layer', function () {
+    });
+
+    function allPNames() {
+        $("#doc-select-2").empty()
+        $.ajax({
+            url: "http://localhost:8080/all_employee/allPName",
+            method: "post",
+            datatype: "json",
+            success: function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    $("#doc-select-2").append("" +
+                        "<option name=\"positionId\" value=\"" + data[i].pid + "\">" + data[i].pname + "</option>")
+                }
+            }
+        })
+    }
+    function allDepNames() {
+        $("#doc-select-1").empty()
+        $.ajax({
+            url: "http://localhost:8080/all_employee/allDepName",
+            method: "post",
+            datatype: "json",
+            success: function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    $("#doc-select-1").append("" +
+                        "<option name=\"positionId\" value=\"" + data[i].did + "\">" + data[i].dname + "</option>")
+                }
+            }
+        })
+    }
+    $(document).ready(allPNames(),allDepNames())
+    function addThisNotice() {
+        layer.open({
+            type: 0
+            , title: "确认增加"
+            , offset: "auto" //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+            , id: 'layerDemo' + 1 //防止重复弹出
+            , content: "是否增加"
+            , btn: ['是', '否']
+            , yes(index, layero) {
+                $.ajax({
+                    url: "[[${#httpServletRequest.requestURL}]]" + "/addEmp",
+                    method: "post",
+                    data: {
+                        ename: $("#doc-ipt-text-1").val(),
+                        sex: $("#sexR").val(),
+                        password: $("#doc-ipt-pwd-1").val(),
+                        entryDate: $("#doc-ipt-date-3").val(),
+                        basicSalary: $("#doc-ipt-text-4").val(),
+                        departmentId: $("#doc-select-1").val(),
+                        positionId: $("#doc-select-2").val()
+                    },
+                    datatype: "json",
+                    success: function (data) {
+                        //根据后台返回的参数，来进行判断
+                        if (data != null) {
+                            layer.alert('添加成功', {icon: 1, title: '提示'}, function (i) {
+                                layer.close(i);
+                                layer.close(index);//关闭弹出层
+                                $('#emp_form')[0].reset()
+                            })
+                        }
+                    },
+                    error:function (XMLHttpRequest, textStatus, errorThrown){
+                        var str ='';
+                        var errorInfo = JSON.parse(XMLHttpRequest.responseText);
+                        if(errorInfo.ModelState!=undefined && errorInfo.ModelState.length!=0){
+                            $.each(errorInfo.ModelState,function(n,val){
+                                str+=val[0]+';<br>';
+                            });
+                            layer.alert(str,{icon:2,title:'错误提示'});
+                        }
+                    }
+                })
+            }
+            , btn2: function () {
+                layer.closeAll();
+                $('#emp_form')[0].reset()
+            }
+            , btnAlign: 'c' //按钮居中
+            , shade: 0 //不显示遮罩
+        });
+    }
+</script>
+</body>
+
+
+</html>

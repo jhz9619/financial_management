@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台模板</title>
+    <div th:include="commons :: thead"></div>
+</head>
+<body>
+<!-- Begin page -->
+<div th:include="commons :: badmin"/>
+<div class="admin">
+    <div th:replace="commons :: tleftSidebar"/>
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="card-box">
+                <!-- Row start -->
+                <div class="am-g">
+                    <div class="am-u-sm-12 am-u-md-3">
+                        <div class="am-input-group am-input-group-sm">
+                            <input type="text" class="am-form-field">
+                            <span class="am-input-group-btn">
+				            <button class="am-btn am-btn-default" type="button">搜索</button>
+				          </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row end -->
+                <!-- Row start -->
+                <div class="am-g">
+                    <div class="am-u-sm-12">
+                        <table id="table_emp" class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                            <tr>
+                                <th class="table-id">ID</th>
+                                <th class="table-title">姓名</th>
+                                <th class="table-type">性别</th>
+                                <th class="table-type">密码</th>
+                                <th class="table-date am-hide-sm-only">入职时间</th>
+                                <th class="table-type">基本工资</th>
+                                <th class="table-type">部门</th>
+                                <th class="table-type">职务</th>
+                                <th class="table-set">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tEmp">
+                            </tbody>
+                        </table>
+                        <div class="am-cf">
+                            <p id="EmpNums">共 15 条记录</p>
+                            <div class="am-fr">
+                                <ul id="pageNum" class="am-pagination">
+
+                                </ul>
+                            </div>
+                        </div>
+                        <hr/>
+                        <p>注：.....</p>
+                    </div>
+                </div>
+                <!-- Row end -->
+            </div>
+        </div>
+    </div>
+</div>
+<div id="form_emp" style="display: none">
+    <form class="am-form am-text-sm">
+        <div class="am-form-group">
+            <div class="am-g">
+                <label class="am-u-md-2 am-md-text-right am-padding-left-0"
+                       for="doc-ipt-text-1">姓名</label>
+                <input name="ename" class="am-u-md-10 form-control" id="doc-ipt-text-1"
+                       placeholder="输入标题信息">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <div class="am-g">
+                <label class="am-u-md-2 am-md-text-right am-padding-left-0">性别</label>
+                <div class="am-radio-inline">
+                    <label>
+                        <input id="sexR" type="radio" name="sex" value="男" checked>
+                        男
+                    </label>
+                </div>
+                <div class="am-radio-inline">
+                    <label>
+                        <input type="radio" name="sex" value="女">
+                        女
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <div class="am-g">
+                <label class="am-u-md-2 am-md-text-right am-padding-left-0"
+                       for="doc-ipt-pwd-1">密码</label>
+                <input name="password" type="text" class="am-u-md-10" id="doc-ipt-pwd-1"
+                       placeholder="设置个密码吧">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <div class="am-g">
+                <label class="am-u-md-2 am-md-text-right am-padding-left-0"
+                       for="doc-ipt-date-3">入职时间</label>
+                <input name="entryDate" type="date" class="am-u-md-10" id="doc-ipt-date-3"
+                       placeholder="选择时间">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <div class="am-g">
+                <label class="am-u-md-2 am-md-text-right am-padding-left-0"
+                       for="doc-ipt-text-4">基本工资</label>
+                <input name="basicSalary" type="number" class="am-u-md-10 form-control" id="doc-ipt-text-4"
+                       placeholder="工资">
+            </div>
+        </div>
+        <div class="am-form-group">
+            <label for="doc-select-1">部门</label>
+            <select id="doc-select-1">
+            </select>
+            <span class="am-form-caret"></span>
+        </div>
+        <div class="am-form-group">
+            <label for="doc-select-2">职位</label>
+            <select id="doc-select-2">
+            </select>
+            <span class="am-form-caret"></span>
+        </div>
+    </form>
+</div>
+
+<div th:include="commons :: tscript"></div>
+
+<script>
+
+    function fillForm(eid) {
+        var x = new Array(8);
+        var i = 0;
+        $("#" + eid.toString()).children("td").each(function () {
+            if (i < 8) {
+                x[i] = $(this).text()
+                i = i + 1;
+            } else {
+                return false;
+            }
+        })
+        console.log(x);
+        $("#doc-ipt-text-1").val(x[1]);
+        $("#sexR").val(x[2]);
+        $("#doc-ipt-pwd-1").val(x[3]);
+        $("#doc-ipt-date-3").val(x[4]);
+        $("#doc-ipt-text-4").val(x[5]);
+        $("#doc-select-1").text(x[6]);
+        $("#doc-select-2").text(x[7]);
+    }
+
+    function allPNames() {
+        $("#doc-select-2").empty()
+        $.ajax({
+            url: "[[${#httpServletRequest.requestURL}]]" + "/allPName",
+            method: "post",
+            datatype: "json",
+            success: function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    $("#doc-select-2").append("" +
+                        "<option name=\"positionId\" value=\"" + data[i].pid + "\">" + data[i].pname + "</option>")
+                }
+            }
+        })
+    }
+
+    function allDepNames() {
+        $("#doc-select-1").empty()
+        $.ajax({
+            url: "[[${#httpServletRequest.requestURL}]]" + "/allDepName",
+            method: "post",
+            datatype: "json",
+            success: function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    $("#doc-select-1").append("" +
+                        "<option name=\"positionId\" value=\"" + data[i].did + "\">" + data[i].dname + "</option>")
+                }
+            }
+        })
+    }
+
+    function page(num) {
+        let table_body = $("#tEmp");
+        table_body.empty();
+        $.ajax({
+            url: "[[${#httpServletRequest.requestURL}]]" + "/allEmp/" + num,
+            //"[[${#httpServletRequest.requestURL}]]" + "/allNotices"
+            method: "post",
+            datatype: "json",
+            success: function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    $("#tEmp").append(
+                        "<tr id=\"" + data[i].eid + "\">\n" +
+                        "    <td>" + data[i].eid + "</td>\n" +
+                        "    <td>" + data[i].ename + "</td>\n" +
+                        "    <td>" + data[i].sex + "</td>\n" +
+                        "    <td>" + data[i].password + "</td>\n" +
+                        "    <td class=\"am-hide-sm-only\">" + data[i].entryDate + "</td>\n" +
+                        "    <td>" + data[i].basicSalary + "</td>\n" +
+                        "    <td>" + data[i].dname + "</td>\n" +
+                        "    <td>" + data[i].pname + "</td>\n" +
+                        "    <td>\n" +
+                        "        <div class=\"am-btn-toolbar\">\n" +
+                        "            <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                <button onclick=\"updateEmp(" + "'" + data[i].eid + "'" + ")\" class=\"am-btn am-btn-default am-btn-xs am-text-secondary\"><span\n" +
+                        "                        class=\"am-icon-pencil-square-o\"></span> 编辑\n" +
+                        "                </button>\n" +
+                        "                </button>\n" +
+                        "                <button onclick=\"deleteN(" + "'" + data[i].eid + "'" + ")\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only\">\n" +
+                        "                    <span class=\"am-icon-trash-o\"></span> 删除\n" +
+                        "                </button>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "</tr>"
+                    )
+                }
+            }
+        })
+    }
+
+    $(document).ready(empNums(),page(1))
+
+    function empNums() {
+        $.ajax({
+            url: "[[${#httpServletRequest.requestURL}]]" + "/EmpNums",
+            //"[[${#httpServletRequest.requestURL}]]" + "/allNotices"
+            method: "get",
+            datatype: "json",
+            success: function (data) {
+                $("#EmpNums").html("共" + data + "条数据");
+                if (data < 8) {
+                    $("#pageNum").append("" +
+                        "<li className=\"am-disabled\"><a onclick=\"page()\">«</a></li>")
+                    $("#pageNum").append("<li className=\"am-disabled\"><a id=\""+"onePage"+"\" onclick=\"page(" + 1 + ")\">" + 1 + "</a></li>")
+                    $("#pageNum").append("<li><a href=\"#\">»</a></li>")
+                }else{
+                    const num = Math.ceil(data / 8) + 2;
+                    for (let i = 0; i < num; i++) {
+                        if (i == 0) {
+                            $("#pageNum").append("" +
+                                "<li className=\"am-disabled\"><a onclick=\"page()\">«</a></li>")
+                            continue;
+                        }
+                        if(i==1){
+                            $("#pageNum").append("<li className=\"am-disabled\"><a id=\""+"onePage"+"\" onclick=\"page(" + 1 + ")\">" + 1 + "</a></li>")
+                            continue;
+                        }
+                        $("#pageNum").append("<li className=\"am-disabled\"><a onclick=\"page(" + i + ")\">" + i + "</a></li>")
+                        if (i == (num - 1)) {
+                            $("#pageNum").append("<li><a href=\"#\">»</a></li>")
+                            continue;
+                        }
+                    }
+                }
+
+            }
+        })
+    }
+
+    function deleteN(eid) {
+        layer.open({
+            type: 0
+            , title: "是否删除"
+            , offset: "auto" //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+            , id: 'layerDemo' + 1 //防止重复弹出
+            , content: "是否删除"
+            , btn: ['是', '否']
+            , yes(index, layero) {
+                $.ajax({
+                    url: "[[${#httpServletRequest.requestURL}]]" + "/deleteEmp",
+                    method: "post",
+                    data: {
+                        eid: eid
+                    },
+                    datatype: "json",
+                    success: function (data) {
+                        //根据后台返回的参数，来进行判断
+                        if (data != null) {
+                            layer.alert('修改成功', {icon: 1, title: '提示'}, function (i) {
+                                layer.close(i);
+                                layer.close(index);//关闭弹出层
+                                window.parent.location.reload();//刷新父页面
+                            })
+                        }
+                    }
+                })
+            }
+            , btn2: function () {
+                layer.closeAll();
+            }
+            , btnAlign: 'c' //按钮居中
+            , shade: 0 //不显示遮罩
+
+        });
+    }
+
+    function updateEmp(eid) {
+        allPNames();
+        allDepNames();
+        fillForm(eid);
+        layer.open({
+            type: 1
+            , title: "编辑公告"
+            , area: ['600px', '600px']
+            , offset: "auto" //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
+            , id: 'layerDemo' + 1 //防止重复弹出
+            , content: $("#form_emp")
+            , btn: ['提交', '取消']
+            , yes(index, layero) {
+                $.ajax({
+                    url: "[[${#httpServletRequest.requestURL}]]" + "/updateEmp",
+                    method: "post",
+                    data: {
+                        eid: eid,
+                        ename: $("#doc-ipt-text-1").val(),
+                        sex: $("#sexR").val(),
+                        password: $("#doc-ipt-pwd-1").val(),
+                        entryDate: $("#doc-ipt-date-3").val(),
+                        basicSalary: $("#doc-ipt-text-4").val(),
+                        departmentId: $("#doc-select-1").val(),
+                        positionId: $("#doc-select-2").val()
+                    },
+                    datatype: "json",
+                    success: function (data) {
+                        //根据后台返回的参数，来进行判断
+                        if (data != null) {
+                            layer.alert('修改成功', {icon: 1, title: '提示'}, function (i) {
+                                layer.close(i);
+                                layer.close(index);//关闭弹出层
+                                window.parent.location.reload();//刷新父页面
+                            })
+                        }
+                    }
+                })
+            }
+            , btn2: function () {
+                layer.closeAll();
+            }
+            , btnAlign: 'c' //按钮居中
+            , shade: 0 //不显示遮罩
+
+        });
+    }
+
+</script>
+</body>
+
+</html>

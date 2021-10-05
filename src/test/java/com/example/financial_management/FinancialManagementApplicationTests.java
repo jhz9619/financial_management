@@ -1,13 +1,13 @@
 package com.example.financial_management;
 
 import com.example.financial_management.entity.Employee;
-import com.example.financial_management.mapper.EmployeeMapper;
+import com.example.financial_management.service.impl.EmployeeServiceImpl;
+import com.example.financial_management.vo.EmpVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.sql.DataSource;
-import java.sql.SQLException;
 import java.util.List;
 
 @SpringBootTest
@@ -17,26 +17,22 @@ class FinancialManagementApplicationTests {
     DataSource dataSource;
 
     @Autowired
-    EmployeeMapper employeeMapper;
+    EmployeeServiceImpl employeeService;
 
     @Test
     void contextLoads() {
-        System.out.println(dataSource);
-        try {
-            System.out.println(dataSource.getConnection());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        List<EmpVO> empVOS = employeeService.EmpVOPage(2);
+        empVOS.forEach(System.out::println);
     }
     @Test
     void test1() {
-        String projectPath = System.getProperty("user.dir");
-        System.out.println(projectPath);
+        List<EmpVO> empVOS = employeeService.allEmpVO();
+        empVOS.forEach(System.out::println);
     }
     @Test
-    void test2() {
-        List<Employee> employees = employeeMapper.selectList(null);
-        employees.forEach(System.out::println);
+    void test() {
+        List<Employee> list = employeeService.list();
+        list.forEach(System.out::println);
     }
 
 }

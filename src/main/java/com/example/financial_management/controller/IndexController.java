@@ -15,52 +15,70 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping("/index.html")
+    @RequestMapping("/index")
     @ApiOperation("跳转主页")
     public String index() {
         return "index";
     }
 
-    @RequestMapping("/table_basic.html")
-    @ApiOperation("table_basic")
+    @RequestMapping("/table_basic")
+    @ApiOperation(value = "table_basic",httpMethod ="GET")
     public String table_basic() {
         return "table_basic";
     }
 
-    @RequestMapping("/table_complete.html")
-    @ApiOperation("table_complete")
+    @RequestMapping("/table_complete")
+    @ApiOperation(value = "table_complete",httpMethod ="GET")
     public String table_complete() {
         return "table_complete";
     }
 
-    @RequestMapping("/chart_line.html")
-    @ApiOperation("chart_line")
+    @RequestMapping("/notice_manage")
+    @ApiOperation(value = "notice_manage",httpMethod ="GET")
     public String chart_line() {
-        return "chart_line";
+        return "all_notice";
     }
 
-    @RequestMapping("/chart_columnar.html")
-    @ApiOperation("chart_columnar")
+    @RequestMapping("/add_notice")
+    @ApiOperation(value = "add_notice",httpMethod ="GET")
+    public String add_notice() {
+        return "add_notice";
+    }
+
+    @RequestMapping("/chart_columnar")
+    @ApiOperation(value = "chart_columnar",httpMethod ="GET")
     public String chart_columnar() {
         return "chart_columnar";
     }
 
-    @RequestMapping("/chart_pie.html")
-    @ApiOperation("chart_pie")
+    @RequestMapping("/chart_pie")
+    @ApiOperation(value = "chart_pie",httpMethod ="GET")
     public String chart_pie() {
         return "chart_pie";
     }
 
-    @RequestMapping("/form_basic.html")
-    @ApiOperation("form_basic")
+    @RequestMapping("/form_basic")
+    @ApiOperation(value = "form_basic",httpMethod ="GET")
     public String form_basic() {
         return "form_basic";
     }
 
-    @RequestMapping("/form_validate.html")
-    @ApiOperation("form_validate")
+    @RequestMapping("/form_validate")
+    @ApiOperation(value = "form_validate",httpMethod ="GET")
     public String form_validate() {
         return "form_validate";
+    }
+
+    @RequestMapping("/all_employee")
+    @ApiOperation(value = "all_employee",httpMethod ="GET")
+    public String all_employee() {
+        return "all_employee";
+    }
+
+    @RequestMapping("/add_employee")
+    @ApiOperation(value = "add_employee",httpMethod ="GET")
+    public String add_employee() {
+        return "add_employee";
     }
 
 }

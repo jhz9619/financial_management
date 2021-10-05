@@ -3,7 +3,10 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://47.113.216.99:3306/FinancialManagement
+    url: jdbc:mysql://localhost:3306/FinancialManagement
+  mvc:
+    format:
+      date: yyyy-MM-dd
 # 配置日志
 mybatis-plus:
   configuration:

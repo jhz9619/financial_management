@@ -1,7 +1,10 @@
 package com.example.financial_management.service;
 
-import com.example.financial_management.entity.Employee;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.financial_management.entity.Employee;
+import com.example.financial_management.vo.EmpVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IEmployeeService extends IService<Employee> {
 
+    List<EmpVO> allEmpVO();
+    List<EmpVO> EmpVOPage(int start);
 }

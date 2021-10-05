@@ -3,6 +3,7 @@
 <head th:fragment="thead">
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/layui.css}"  media="all">
     <link rel="stylesheet" th:href="@{/assets/css/amazeui.css}" href="/static/assets/css/amazeui.css"/>
     <link rel="stylesheet" th:href="@{http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css}"
           href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -14,18 +15,18 @@
           href="../assets/css/page/typography.css"/>
     <link rel="stylesheet" th:href="@{/assets/css/page/form.css}"/>
     <link rel="stylesheet" th:href="@{/assets/css/component.css}"/>
+
 </head>
 <body>
 
 <div th:fragment="badmin">
     <header class="am-topbar am-topbar-fixed-top">
     <div class="am-topbar-left am-hide-sm-only">
-        <a th:href="@{/index.html}" class="logo"><span>Admin<span>to</span></span><i class="zmdi zmdi-layers"></i></a>
+        <a th:href="@{/index}" class="logo"><span>Admin<span>to</span></span><i class="zmdi zmdi-layers"></i></a>
     </div>
 
     <div class="contain">
         <ul class="am-nav am-navbar-nav am-navbar-left">
-
             <li><h4 class="page-title">基本表格</h4></li>
         </ul>
 
@@ -66,27 +67,33 @@
         </div>
         <!-- End User -->
         <ul class="am-list admin-sidebar-list">
-            <li><a th:href="@{/index.html}"><span class="am-icon-home"></span> 首页</a></li>
+            <li><a th:href="@{/index}"><span class="am-icon-home"></span> 首页</a></li>
             <li class="admin-parent">
                 <a class="am-cf" data-am-collapse="{target: '#collapse-nav1'}"><span class="am-icon-table"></span> 表格 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                 <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav1">
-                    <li><a th:href="@{table_basic.html}" class="am-cf"> 基本表格</a></li>
-                    <li><a th:href="@{table_complete.html}">完整表格</a></li>
+                    <li><a th:href="@{table_basic}" class="am-cf"> 基本表格</a></li>
+                    <li><a th:href="@{table_complete}">完整表格</a></li>
                 </ul>
             </li>
             <li class="admin-parent">
-                <a class="am-cf" data-am-collapse="{target: '#collapse-nav2'}"><i class="am-icon-line-chart" aria-hidden="true"></i> 统计图表 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                <a class="am-cf" data-am-collapse="{target: '#collapse-nav2'}"><i class="am-icon-line-chart" aria-hidden="true"></i> 公告管理<span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                 <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav2">
-                    <li><a th:href="@{chart_line.html}" class="am-cf"> 折线图</a></li>
-                    <li><a th:href="@{chart_columnar.html}" class="am-cf"> 柱状图</a></li>
-                    <li><a th:href="@{chart_pie.html}" class="am-cf"> 饼状图</a></li>
+                    <li><a th:href="@{notice_manage}" class="am-cf"> 所有公告</a></li>
+                    <li><a th:href="@{add_notice}" class="am-cf"> 新增公告</a></li>
+                </ul>
+            </li>
+            <li class="admin-parent">
+                <a class="am-cf" data-am-collapse="{target: '#collapse-nav3'}"><i class="am-icon-line-chart" aria-hidden="true"></i> 员工信息<span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav3">
+                    <li><a th:href="@{all_employee}" class="am-cf"> 所有员工</a></li>
+                    <li><a th:href="@{add_employee}" class="am-cf"> 新增员工</a></li>
                 </ul>
             </li>
             <li class="admin-parent">
                 <a class="am-cf" data-am-collapse="{target: '#collapse-nav5'}"><span class="am-icon-file"></span> 表单 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                 <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav5">
-                    <li><a th:href="@{form_basic.html}" class="am-cf"> 基本表单</a></li>
-                    <li><a th:href="@{form_validate.html}">表单验证</a></li>
+                    <li><a th:href="@{form_basic}" class="am-cf"> 基本表单</a></li>
+                    <li><a th:href="@{form_validate}">表单验证</a></li>
                 </ul>
             </li>
         </ul>
@@ -96,10 +103,12 @@
 
 
 <div th:fragment="tscript">
+    <script type="text/javascript" th:src="@{/layui.js}" charset="utf-8"></script>
     <script type="text/javascript" th:src="@{/assets/js/jquery-2.1.0.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/amazeui.min.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/app.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/blockUI.js}"></script>
+
 </div>
 </body>
 </html>
