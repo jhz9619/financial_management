@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @RequestMapping({"/", "/login"})
-    @ApiOperation(" 跳转登录页")
+    @ApiOperation(value = " 跳转登录页",httpMethod ="GET")
     public String login() {
         return "login";
     }
 
     @RequestMapping("/index")
-    @ApiOperation("跳转主页")
+    @ApiOperation(value = "跳转主页",httpMethod ="GET")
     public String index() {
         return "index";
     }

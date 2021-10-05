@@ -159,7 +159,7 @@
         $("#doc-select-2").empty()
         $.ajax({
             url: "[[${#httpServletRequest.requestURL}]]" + "/allPName",
-            method: "post",
+            method: "get",
             datatype: "json",
             success: function (data) {
                 for (let i = 0; i < data.length; i++) {
@@ -174,7 +174,7 @@
         $("#doc-select-1").empty()
         $.ajax({
             url: "[[${#httpServletRequest.requestURL}]]" + "/allDepName",
-            method: "post",
+            method: "get",
             datatype: "json",
             success: function (data) {
                 for (let i = 0; i < data.length; i++) {

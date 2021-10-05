@@ -10,10 +10,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,7 +27,7 @@ public class EmployeeController {
     @Autowired
     EmployeeServiceImpl employeeService;
 
-    @RequestMapping("/adminLogin")
+    @PostMapping("/adminLogin")
     @ApiOperation("admin登陆判断")
     public String adminLogin(@ApiParam("用户名") @RequestParam("username") String username
             ,@ApiParam("密码") @RequestParam("password") String password, Model model) {
@@ -43,22 +40,23 @@ public class EmployeeController {
         }
     }
 
-    @RequestMapping("/all_employee/allEmp/{pageNum}")
+    @PostMapping("/all_employee/allEmp/{pageNum}")
     @ResponseBody
     @ApiOperation("查看所有员工")
     public List<EmpVO> allEmp(@PathVariable int pageNum){
         List<EmpVO> empVOS = employeeService.EmpVOPage(pageNum);
         return empVOS;
     }
-    @RequestMapping("/all_employee/EmpNums")
+
+    @GetMapping("/all_employee/EmpNums")
     @ResponseBody
     @ApiOperation("员工总数")
-    public int EmpNums(){
-        List<EmpVO> empVOS = employeeService.allEmpVO();
-        return empVOS.size();
+    public long EmpNums(){
+        long count = employeeService.count();
+        return count;
     }
 
-    @RequestMapping("/all_employee/updateEmp")
+    @PostMapping("/all_employee/updateEmp")
     @ApiOperation("管理员修改员工")
     @ResponseBody
     public String updateEmp(Employee employee){
@@ -68,7 +66,7 @@ public class EmployeeController {
        return "success";
     }
 
-    @RequestMapping("/all_employee/deleteEmp")
+    @PostMapping("/all_employee/deleteEmp")
     @ApiOperation("管理员删除员工")
     @ResponseBody
     public String deleteEmp(int eid){
@@ -77,7 +75,8 @@ public class EmployeeController {
         employeeService.remove(wrapper);
         return "success";
     }
-    @RequestMapping("/add_employee/addEmp")
+
+    @PostMapping("/add_employee/addEmp")
     @ApiOperation("管理员增加员工")
     @ResponseBody
     public String addEmp(Employee employee){
